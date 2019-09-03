@@ -1,7 +1,6 @@
-
 <div class="d-flex ">
     <h2 class="content-block">Display Data</h2>
-        <div class="f-grow"></div>
+    <div class="f-grow"></div>
     <dx-button class="button-grid" [text]="'Добавить'" [width]="190" (onClick)="addData()"></dx-button>
 </div>
 
@@ -13,8 +12,9 @@
                   [focusedRowIndex]="0"
                   [columnAutoWidth]="true"
                   [columnHidingEnabled]="true"
-                    [keyExpr]="'Task_ID'"
+                  [keyExpr]="'Task_ID'"
                   (onFocusedRowChanged)="onFocusedRowChanged($event)">
+
 
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
@@ -23,6 +23,7 @@
         <dxi-column
                 dataField="Task_ID"
                 [width]="90"
+
                 [hidingPriority]="2">
         </dxi-column>
         <dxi-column
@@ -74,6 +75,16 @@
                 caption="Completion"
                 [hidingPriority]="0">
         </dxi-column>
+        <div *dxTemplate="let cellInfo of 'editCellTemplate'">
+            <dx-switch
+                    [width]="50"
+                    switchedOnText="YES"
+                    switchedOffText="NO"
+                    [(value)]="cellInfo.value"
+                    (onValueChanged)="setEditedValue($event, cellInfo)">
+            </dx-switch>
+        </div>
+        <dxo-editing mode="batch" [allowUpdating]="true"></dxo-editing>
     </dx-data-grid>
 
 

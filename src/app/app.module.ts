@@ -10,7 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {HomeComponent} from './pages/home/home.component';
 import {ProfileComponent} from './pages/profile/profile.component';
 import {DisplayDataComponent} from './pages/display-data/display-data.component';
-import {DxButtonModule, DxDataGridModule, DxFormModule} from 'devextreme-angular';
+import {DxButtonModule, DxDataGridModule, DxFormModule, DxSwitchModule} from 'devextreme-angular';
 
 @NgModule({
     declarations: [
@@ -31,6 +31,7 @@ import {DxButtonModule, DxDataGridModule, DxFormModule} from 'devextreme-angular
         DxButtonModule,
         DxDataGridModule,
         DxFormModule,
+        DxSwitchModule
     ],
     exports: [
         HomeComponent,
