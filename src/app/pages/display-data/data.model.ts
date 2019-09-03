@@ -14,4 +14,5 @@ export interface DataModel {
     Task_Start_Date: string;
     Task_Status: string;
     Task_Subject: string;
+    Random_ID: string;
 }

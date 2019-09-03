@@ -16,26 +16,8 @@ export class DisplayDataComponent implements OnInit {
     @ViewChild(DxDataGridComponent, {static: false}) dataGrid: DxDataGridComponent;
 
     priority: any[];
-    myArray: any[];
+    myArray: any = [];
     rowIndex = 0;
-
-    /*myData: DataModel  = {
-        Task_ID: 0,
-        SSMA_TimeStamp: 'AAAAAAAAG1k=',
-        Task_Assigned_Employee_ID: 7,
-        Task_Completion: 100,
-        Task_Customer_Employee_ID: null,
-        Task_Description: '<div>Hello Word</div>',
-        Task_Due_Date: '2019-01-31T00:00:00',
-        Task_Owner_ID: 1,
-        Task_Priority: 4,
-        Task_Reminder: true,
-        Task_Reminder_Date: '2019-01-20T00:00:00',
-        Task_Reminder_Time: '2019-12-30T08:00:00',
-        Task_Start_Date: '2019-01-15T00:00:00',
-        Task_Status: 'Completed',
-        Task_Subject: 'Мои данные',
-    };*/
 
     myData: DataModel = {
         Task_ID: null,
@@ -53,6 +35,7 @@ export class DisplayDataComponent implements OnInit {
         Task_Start_Date: new Date().toISOString(),
         Task_Status: '',
         Task_Subject: '',
+        Random_ID: ''
     };
 
     constructor(private service: Service) {
@@ -70,6 +53,9 @@ export class DisplayDataComponent implements OnInit {
 
     async init() {
         const myArray = await this.service.getMyData();
+        for (const item of myArray.value) {
+            item.Random_ID = Math.random().toString(36).slice(-10);
+        }
         this.myArray = myArray.value;
     }
 
@@ -78,7 +64,6 @@ export class DisplayDataComponent implements OnInit {
         if (event && event.row && event.row.data) {
             this.rowIndex = event.row.data.Task_ID + 1;
         }
-        console.log(this.rowIndex);
     }
 
 
@@ -92,7 +77,6 @@ export class DisplayDataComponent implements OnInit {
         const dataGrid = this.dataGrid.instance;
         dataGrid.focus(dataGrid.getCellElement(this.rowIndex - 1, 'Task_ID'));
         dataGrid.editCell(this.rowIndex - 1, 'Task_ID');
-        console.dir(dataGrid.getCellElement(this.rowIndex - 1, 0));
     }
 
 }
