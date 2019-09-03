@@ -5,6 +5,7 @@ import {DataModel} from './data.model';
 import * as _ from 'lodash';
 import {DxDataGridComponent} from 'devextreme-angular';
 
+
 @Component({
     templateUrl: 'display-data.component.html'
 })
@@ -77,7 +78,7 @@ export class DisplayDataComponent implements OnInit {
         if (event && event.row && event.row.data) {
             this.rowIndex = event.row.data.Task_ID + 1;
         }
-
+        console.log(this.rowIndex);
     }
 
 
@@ -89,7 +90,9 @@ export class DisplayDataComponent implements OnInit {
         });
         this.dataGrid.instance.option('focusedRowKey', this.rowIndex);
         const dataGrid = this.dataGrid.instance;
-        dataGrid.focus(dataGrid.getCellElement(this.rowIndex - 1, 0));
-
+        dataGrid.focus(dataGrid.getCellElement(this.rowIndex - 1, 'Task_ID'));
+        dataGrid.editCell(this.rowIndex - 1, 'Task_ID');
+        console.dir(dataGrid.getCellElement(this.rowIndex - 1, 0));
     }
+
 }
