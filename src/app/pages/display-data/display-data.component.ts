@@ -54,7 +54,7 @@ export class DisplayDataComponent implements OnInit {
     async init() {
         const myArray = await this.service.getMyData();
         for (const item of myArray.value) {
-            item.Random_ID = Math.random().toString(36).slice(-10);
+            item.Random_ID =  item.Task_ID;
         }
         this.myArray = myArray.value;
     }
@@ -72,6 +72,7 @@ export class DisplayDataComponent implements OnInit {
         this.myArray.splice(this.rowIndex, 0, data);
         _.each(this.myArray, (item, index) => {
             item.Task_ID = index;
+            item.Random_ID = index;
         });
         this.dataGrid.instance.option('focusedRowKey', this.rowIndex);
         const dataGrid = this.dataGrid.instance;
